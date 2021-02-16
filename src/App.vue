@@ -1,28 +1,61 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar app color="cyan" dark>
+      <v-container>
+        <v-row align="center">
+          <v-toolbar-title
+            ><router-link to="/" class="logo"
+              >Vue Test App</router-link
+            ></v-toolbar-title
+          >
+
+          <v-spacer></v-spacer>
+          <FavoritesDropdown />
+
+          <v-btn icon to="/cart" title="cart">
+            <v-badge
+              color="pink"
+              :content="totalAmountOf('cart')"
+              :value="cartTotalAmount"
+              bottom
+            >
+              <v-icon>mdi-cart-outline</v-icon>
+            </v-badge>
+          </v-btn>
+          <v-btn text disabled light>${{ cartTotalAmount }}</v-btn>
+        </v-row>
+      </v-container>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <router-view />
+      </v-container>
+    </v-main>
+    <v-footer padless style="margin-top: 30px">
+      <v-col class="text-center" cols="12">
+        {{ new Date().getFullYear() }} — <strong>Vue Test App</strong>
+      </v-col>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FavoritesDropdown from "./components/FavoritesDropdow";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    FavoritesDropdown,
+  },
+  computed: mapGetters(["cartTotalAmount", "totalAmountOf"]),
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.logo {
+  text-decoration: none;
+  color: white;
 }
 </style>
