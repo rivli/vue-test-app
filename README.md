@@ -10,6 +10,10 @@
 - Vue Router
 - Axios
 
+## Data Source
+
+[Fake Store API](https://fakestoreapi.com/)
+
 ### How run localy?
 
 1. Install NodeJs
