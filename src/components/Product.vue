@@ -9,7 +9,10 @@
       >
         <ProductCard
           :product="product"
-          :userActions="userActions"
+          :addToCart="addToCart"
+          :removeFromCart="removeFromCart"
+          :addToFavorites="addToFavorites"
+          :removeFromFavorites="removeFromFavorites"
           :isInFavorites="this.checkIfProductInFavorites"
           :isInCart="this.checkIfProductInCart"
         />
@@ -22,36 +25,22 @@
         <v-btn
           icon
           v-if="this.checkIfProductInFavorites"
-          v-on:click="
-            userActions({ action: 'removeFromFavorites', payload: product.id })
-          "
+          v-on:click="removeFromFavorites(product)"
         >
           <v-icon>mdi-heart</v-icon>
         </v-btn>
-        <v-btn
-          icon
-          v-else
-          v-on:click="
-            userActions({ action: 'addToFavorites', payload: product })
-          "
-        >
+        <v-btn icon v-else v-on:click="addToFavorites(product)">
           <v-icon>mdi-heart-outline</v-icon>
         </v-btn>
 
         <v-btn
           icon
           v-if="this.checkIfProductInCart"
-          v-on:click="
-            userActions({ action: 'removeFromCart', payload: product.id })
-          "
+          v-on:click="removeFromCart(product)"
         >
           <v-icon>mdi-cart</v-icon>
         </v-btn>
-        <v-btn
-          icon
-          v-else
-          v-on:click="userActions({ action: 'addToCart', payload: product })"
-        >
+        <v-btn icon v-else v-on:click="addToCart(product)">
           <v-icon>mdi-cart-outline</v-icon>
         </v-btn>
       </v-card-actions>
@@ -73,7 +62,12 @@ export default {
     dialog: false,
   }),
   methods: {
-    ...mapActions(["userActions"]),
+    ...mapActions([
+      "addToCart",
+      "removeFromCart",
+      "addToFavorites",
+      "removeFromFavorites",
+    ]),
   },
   computed: {
     ...mapGetters(["isProductInCart", "isProductInFavorites"]),

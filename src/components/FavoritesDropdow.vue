@@ -27,13 +27,7 @@
         <v-list-item-title>{{ product.title }}</v-list-item-title>
         <v-spacer></v-spacer>
 
-        <v-btn
-          icon
-          title="remove"
-          v-on:click="
-            userActions({ action: 'removeFromFavorites', payload: product.id })
-          "
-        >
+        <v-btn icon title="remove" v-on:click="removeFromFavorites(product)">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-list-item>
@@ -52,6 +46,6 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "FavoritesDropdown",
   computed: mapGetters(["allFavorites", "isFavoritesEmpty", "totalAmountOf"]),
-  methods: mapActions(["userActions"]),
+  methods: mapActions(["removeFromFavorites"]),
 };
 </script>

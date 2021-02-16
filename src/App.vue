@@ -37,17 +37,20 @@
         {{ new Date().getFullYear() }} — <strong>Vue Test App</strong>
       </v-col>
     </v-footer>
+    <Snackbar />
   </v-app>
 </template>
 
 <script>
 import FavoritesDropdown from "./components/FavoritesDropdow";
+import Snackbar from "./components/Snackbar";
 import { mapGetters } from "vuex";
 
 export default {
   name: "App",
   components: {
     FavoritesDropdown,
+    Snackbar,
   },
   computed: mapGetters(["cartTotalAmount", "totalAmountOf"]),
 };

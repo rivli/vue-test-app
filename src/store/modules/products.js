@@ -1,4 +1,5 @@
 import axios from "axios";
+import types from "../types";
 
 const state = {
   products: [],
@@ -14,25 +15,29 @@ const actions = {
   async fetchProducts({ commit }) {
     const res = await axios.get("https://fakestoreapi.com/products");
 
-    commit("setProducts", res.data);
+    commit(types.products.SET_PRODUCTS, res.data);
   },
   async fetchCategories({ commit }) {
     const res = await axios.get("https://fakestoreapi.com/products/categories");
 
-    commit("setCategories", res.data);
+    commit(types.products.SET_CATEGORIES, res.data);
   },
   async fetchCategoryProducts({ commit }, category) {
     const res = await axios.get(
       "https://fakestoreapi.com/products/category/" + category
     );
 
-    commit("setProducts", res.data);
+    commit(types.products.SET_PRODUCTS, res.data);
   },
 };
 
 const mutations = {
-  setProducts: (state, products) => (state.products = products),
-  setCategories: (state, categoies) => (state.categories = categoies),
+  [types.products.SET_PRODUCTS](state, products) {
+    state.products = products;
+  },
+  [types.products.SET_CATEGORIES](state, categoies) {
+    state.categories = categoies;
+  },
 };
 
 export default {

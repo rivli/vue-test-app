@@ -1,0 +1,15 @@
+export default {
+  products: {
+    SET_PRODUCTS: "SET_PRODUCTS",
+    SET_CATEGORIES: "SET_CATEGORIES",
+  },
+  user: {
+    ADD_TO_CART: "ADD_TO_CART",
+    REMOVE_FROM_CART: "REMOVE_FROM_CART",
+    ADD_TO_FAVORITES: "ADD_TO_FAVORITES",
+    REMOVE_FROM_FAVORITES: "REMOVE_FROM_FAVORITES",
+  },
+  snackbar: {
+    SET_SNACKBAR: "SET_SNACKBAR",
+  },
+};

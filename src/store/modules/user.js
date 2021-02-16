@@ -1,3 +1,5 @@
+import types from "../types";
+
 const cart = localStorage.VTAcart ? JSON.parse(localStorage.VTAcart) : {};
 const favorites = localStorage.VTAfavorites
   ? JSON.parse(localStorage.VTAfavorites)
@@ -33,31 +35,46 @@ const getters = {
 };
 
 const actions = {
-  userActions({ commit }, { action, payload }) {
-    commit(action, payload);
+  addToCart({ commit, dispatch }, payload) {
+    commit(types.user.ADD_TO_CART, payload);
+    dispatch("setSnackbar", { text: payload.title + " added to cart" });
+  },
+  removeFromCart({ commit, dispatch }, payload) {
+    commit(types.user.REMOVE_FROM_CART, payload.id);
+    dispatch("setSnackbar", { text: payload.title + " removed from cart" });
+  },
+  addToFavorites({ commit, dispatch }, payload) {
+    commit(types.user.ADD_TO_FAVORITES, payload);
+    dispatch("setSnackbar", { text: payload.title + " added to favorites" });
+  },
+  removeFromFavorites({ commit, dispatch }, payload) {
+    commit(types.user.REMOVE_FROM_FAVORITES, payload.id);
+    dispatch("setSnackbar", {
+      text: payload.title + " removed from favorites",
+    });
   },
 };
 
 const mutations = {
-  addToCart: (state, product) => {
+  [types.user.ADD_TO_CART]: (state, product) => {
     let oldCart = state.cart;
     oldCart[product.id] = product;
     state.cart = { ...oldCart };
     localStorage.setItem("VTAcart", JSON.stringify(oldCart));
   },
-  removeFromCart: (state, productID) => {
+  [types.user.REMOVE_FROM_CART]: (state, productID) => {
     let oldCart = state.cart;
     delete oldCart[productID];
     state.cart = { ...oldCart };
     localStorage.setItem("VTAcart", JSON.stringify(oldCart));
   },
-  addToFavorites: (state, product) => {
+  [types.user.ADD_TO_FAVORITES]: (state, product) => {
     let oldFavorites = state.favorites;
     oldFavorites[product.id] = product;
     state.favorites = { ...oldFavorites };
     localStorage.setItem("VTAfavorites", JSON.stringify(oldFavorites));
   },
-  removeFromFavorites: (state, productID) => {
+  [types.user.REMOVE_FROM_FAVORITES]: (state, productID) => {
     let oldFavorites = state.favorites;
     delete oldFavorites[productID];
     state.favorites = { ...oldFavorites };
