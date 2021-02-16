@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 export default new VueRouter({
   mode: "history",
+  base: "/vue-test-app/",
   routes: [
     {
       path: "/",

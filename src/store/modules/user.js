@@ -1,6 +1,6 @@
-const cart = localStorage.cart ? JSON.parse(localStorage.cart) : {};
-const favorites = localStorage.favorites
-  ? JSON.parse(localStorage.favorites)
+const cart = localStorage.VTAcart ? JSON.parse(localStorage.VTAcart) : {};
+const favorites = localStorage.VTAfavorites
+  ? JSON.parse(localStorage.VTAfavorites)
   : {};
 
 const state = {
@@ -43,25 +43,25 @@ const mutations = {
     let oldCart = state.cart;
     oldCart[product.id] = product;
     state.cart = { ...oldCart };
-    localStorage.setItem("cart", JSON.stringify(oldCart));
+    localStorage.setItem("VTAcart", JSON.stringify(oldCart));
   },
   removeFromCart: (state, productID) => {
     let oldCart = state.cart;
     delete oldCart[productID];
     state.cart = { ...oldCart };
-    localStorage.setItem("cart", JSON.stringify(oldCart));
+    localStorage.setItem("VTAcart", JSON.stringify(oldCart));
   },
   addToFavorites: (state, product) => {
     let oldFavorites = state.favorites;
     oldFavorites[product.id] = product;
     state.favorites = { ...oldFavorites };
-    localStorage.setItem("favorites", JSON.stringify(oldFavorites));
+    localStorage.setItem("VTAfavorites", JSON.stringify(oldFavorites));
   },
   removeFromFavorites: (state, productID) => {
     let oldFavorites = state.favorites;
     delete oldFavorites[productID];
     state.favorites = { ...oldFavorites };
-    localStorage.setItem("favorites", JSON.stringify(oldFavorites));
+    localStorage.setItem("VTAfavorites", JSON.stringify(oldFavorites));
   },
 };
 
